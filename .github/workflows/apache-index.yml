@@ -1,3 +1,4 @@
+
 # .github/workflows/install-apache.yml
 name: Install Apache HTTPD
 
@@ -10,12 +11,12 @@ jobs:
     steps:
       - name: Install Apache HTTPD
         run: |
-          sudo dnf install -y httpd
-          sudo systemctl enable --now httpd
-          sudo firewall-cmd --permanent --add-service=http || true
-          sudo firewall-cmd --permanent --add-service=https || true
-          sudo firewall-cmd --reload || true
-          sudo systemctl status httpd
+          dnf install -y httpd
+          systemctl enable --now httpd
+          firewall-cmd --permanent --add-service=http || true
+          firewall-cmd --permanent --add-service=https || true
+          firewall-cmd --reload || true
+          systemctl status httpd
 
       - name: Create index.html
         run: |
@@ -27,5 +28,9 @@ jobs:
 
       - name: Set permissions on index.html
         run: |
+          chown apache:apache /var/www/html/index.html
+          chmod 644 /var/www/html/index.html
+        run: |
           sudo chown apache:apache /var/www/html/index.html
           sudo chmod 644 /var/www/html/index.html
+          
