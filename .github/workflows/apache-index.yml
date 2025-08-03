@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: Install Apache HTTPD
         run: |
-          dnf install -y httpd
-          systemctl enable --now httpd
-          firewall-cmd --permanent --add-service=http || true
-          firewall-cmd --permanent --add-service=https || true
-          firewall-cmd --reload || true
-          systemctl status httpd
+          sudo dnf install -y httpd
+          sudo systemctl enable --now httpd
+          sudo firewall-cmd --permanent --add-service=http || true
+          sudo firewall-cmd --permanent --add-service=https || true
+          sudo firewall-cmd --reload || true
+          sudo systemctl status httpd
 
       - name: Create index.html
         run: |
@@ -24,8 +24,7 @@ jobs:
           <body><h1>Welcome to Apache on CentOS 9!</h1></body>
           </html>" > /var/www/html/index.html
 
-
-      - name: Set permissions on index.html
-        run: |
-          sudo chown apache:apache /var/www/html/index.html
-          sudo chmod 644 /var/www/html/index.html
+      #- name: Set permissions on index.html
+      #  run: |
+      #    sudo chown apache:apache /var/www/html/index.html
+      #    sudo chmod 644 /var/www/html/index.html
