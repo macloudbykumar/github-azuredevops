@@ -8,13 +8,6 @@ jobs:
     runs-on: self-hosted  # your CentOS 9 self-hosted GitHub Actions runner
 
     steps:
-      - name: Verify root user
-        run: |
-          echo "Running as: $(whoami)"
-          if [ "$(whoami)" != "root" ]; then
-            echo "❌ Must be root to run Jenkins setup"
-            exit 1
-          fi
 
       - name: Install Java 17
         run: |
