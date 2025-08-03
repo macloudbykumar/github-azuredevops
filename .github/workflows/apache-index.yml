@@ -1,7 +1,7 @@
 
 # .github/workflows/install-apache.yml
-name: Install Apache HTTPD
-
+name: Install Apache HTTPD with Index
+ 
 on:
   workflow_dispatch:
 
