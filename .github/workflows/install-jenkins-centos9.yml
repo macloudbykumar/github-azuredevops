@@ -11,30 +11,30 @@ jobs:
 
       - name: Install Java 17
         run: |
-          dnf install -y java-17-openjdk java-17-openjdk-devel
+          sudo dnf install -y java-17-openjdk java-17-openjdk-devel
           java -version
 
       - name: Add Jenkins repo and key
         run: |
-          dnf install -y wget
+          sudo dnf install -y wget
           wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
           rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 
       - name: Install Jenkins
         run: |
-          dnf install -y jenkins
+          sudo dnf install -y jenkins
 
       - name: Enable and start Jenkins
         run: |
-          systemctl enable --now jenkins
-          systemctl status jenkins --no-pager
+          sudo systemctl enable --now jenkins
+          sudo systemctl status jenkins --no-pager
 
       - name: Open firewall for Jenkins (port 8080)
         run: |
-          firewall-cmd --permanent --add-port=8080/tcp || true
-          firewall-cmd --reload || true
+          sudo firewall-cmd --permanent --add-port=8080/tcp || true
+          sudo firewall-cmd --reload || true
 
       - name: Show Jenkins initial admin password
         run: |
           echo "Initial admin password (save this):"
-          cat /var/lib/jenkins/secrets/initialAdminPassword || echo "❗ Jenkins not fully initialized yet"
+          sudo cat /var/lib/jenkins/secrets/initialAdminPassword || echo "❗ Jenkins not fully initialized yet"
