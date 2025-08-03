@@ -1,0 +1,16 @@
+name: Install Git on CentOS 9
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install_git:
+    runs-on: self-hosted  # your CentOS 9 runner
+    steps:
+      - name: Check if Git is installed
+        run: git --version || echo "Git not found"
+
+      - name: Install Git on CentOS 9
+        run: |
+          sudo dnf install -y git
+          git --version
