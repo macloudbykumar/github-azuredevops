@@ -1,11 +1,12 @@
 name: Install Apache HTTPD with Index
- 
+
 on:
   workflow_dispatch:
 
 jobs:
   setup_httpd:
     runs-on: self-hosted  # CentOS 9 runner assumed
+
     steps:
       - name: Install Apache HTTPD
         run: |
@@ -22,9 +23,4 @@ jobs:
           <html>
           <head><title>Apache HTTPD is Running</title></head>
           <body><h1>Welcome to Apache on CentOS 9!</h1></body>
-          </html>" > /var/www/html/index.html
-
-      #- name: Set permissions on index.html
-      #  run: |
-      #    sudo chown apache:apache /var/www/html/index.html
-      #    sudo chmod 644 /var/www/html/index.html
+          </html>" | sudo tee /var/www/html/index.html > /dev/null
